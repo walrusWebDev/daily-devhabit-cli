@@ -1,6 +1,6 @@
 {
   "name": "@walruswebdev/daily-devhabit-cli",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Package for Daily Dev Habit CLI Tool",
   "main": "dist/index.js",
   "bin": {
