@@ -46,15 +46,15 @@ The core command. Launches an interactive survey to capture your current work st
 
 - Tags: Comma-separated tags for categorization.
 
-`ddh token`
+### `ddh token`
 Displays your current Cloud API Token.
 
 - Use Case: Copy this token to connect your Daily Dev Habit WordPress Plugin to your cloud account.
 
-`ddh login`
-Authenticates your session and saves your credentials locally to ~/.config/daily-devhabit-cli/.
+### `ddh login`
+Authenticates your session and saves your credentials locally to `~/.config/daily-devhabit-cli-nodejs/`.
 
-`ddh register`
+### `ddh register`
 Creates a new user account on the Daily Dev Habit platform.
 
 ## 🔌 WordPress Integration
