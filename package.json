@@ -1,0 +1,44 @@
+{
+  "name": "@walruswebdev/daily-devhabit-cli",
+  "version": "1.0.5",
+  "description": "Package for Daily Dev Habit CLI Tool",
+  "main": "dist/index.js",
+  "bin": {
+    "ddh": "bin/ddh.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walrusWebDev/daily-devhabit-cli.git"
+  },
+  "keywords": [
+    "cli",
+    "journal",
+    "developer-tools"
+  ],
+  "author": "Lauren Bridges",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/walrusWebDev/daily-devhabit-cli/issues"
+  },
+  "homepage": "https://github.com/walrusWebDev/daily-devhabit-cli#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "commander": "^12.0.0",
+    "conf": "^9.0.2",
+    "dotenv": "^16.4.7",
+    "inquirer": "^8.2.6"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^9.0.9",
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
+  }
+}

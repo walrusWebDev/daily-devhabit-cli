@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    // 1. Output Settings
+    "outDir": "./dist",
+    "rootDir": "./src",
+    
+    // 2. Module Settings (CommonJS is best for CLI tools compatibility)
+    "module": "commonjs",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+
+    // 3. The Fix: Explicitly load Node types
+    "types": ["node"],
+    
+    // 4. Strictness (Good for public code)
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}
