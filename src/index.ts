@@ -170,7 +170,7 @@ program
     }
   });
 
-// --- COMMAND: TOKEN ---
+// --- COMMAND: TOKEN (New!) ---
 program
     .command('token')
     .description('Show your current API token')

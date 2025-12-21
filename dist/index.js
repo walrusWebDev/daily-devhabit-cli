@@ -157,4 +157,22 @@ program
         }
     }
 });
+// --- COMMAND: TOKEN (New!) ---
+program
+    .command('token')
+    .description('Show your current API token')
+    .action(() => {
+    const token = config.get('auth.token');
+    if (token) {
+        console.log('\n🔑 Your Cloud Token:');
+        console.log('---------------------------------------------------');
+        console.log(token);
+        console.log('---------------------------------------------------');
+        console.log('Copy/paste this into your WordPress Settings.\n');
+    }
+    else {
+        console.log('❌ You are not logged in.');
+        console.log('Run "ddh login" first to generate a token.');
+    }
+});
 program.parse(process.argv);
