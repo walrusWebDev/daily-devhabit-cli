@@ -36,20 +36,20 @@ ddh log
 `ddh log` (alias: `l`)
 The core command. Launches an interactive survey to capture your current work state.
 
-Scope: API, Database, Refactor, Feature, etc.
+- Scope: API, Database, Refactor, Feature, etc.
 
-Summary: What did you just do?
+- Summary: What did you just do?
 
-Key Decisions: Did you choose a specific library or pattern? Why?
+- Key Decisions: Did you choose a specific library or pattern? Why?
 
-Friction: What slowed you down?
+- Friction: What slowed you down?
 
-Tags: Comma-separated tags for categorization.
+- Tags: Comma-separated tags for categorization.
 
 `ddh token`
 Displays your current Cloud API Token.
 
-Use Case: Copy this token to connect your Daily Dev Habit WordPress Plugin to your cloud account.
+- Use Case: Copy this token to connect your Daily Dev Habit WordPress Plugin to your cloud account.
 
 `ddh login`
 Authenticates your session and saves your credentials locally to ~/.config/daily-devhabit-cli/.
