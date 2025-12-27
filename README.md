@@ -1,79 +1,235 @@
-# Daily Dev Habit CLI 🚀
+# Daily Dev Habit CLI (`ddh`) 🚀
 
-**Engineering Intelligence for the Busy Developer.**
+### *Your engineering history — searchable, structured, synced.*
 
-The **Daily Dev Habit CLI** (`ddh`) is a frictionless command-line tool designed to help software engineers capture decisions, blockers, and progress without leaving the terminal. It serves as the primary data entry point for the Daily Dev Habit ecosystem, syncing your logs to the cloud or saving them locally when offline.
+The **Daily Dev Habit CLI** is a frictionless command-line tool that helps developers quickly capture:
+
+* what they worked on
+* key decisions made
+* blockers and friction
+* progress and scope
+* useful tags for later search
+
+All **without leaving the terminal**.
+
+Use it to build a lightweight engineering journal, generate weekly status reports, or maintain a decision log across projects — with **cloud sync and offline support**.
+
+---
+
+## ✨ Why Daily Dev Habit exists
+
+Developers face real problems:
+
+* You forget what you worked on two days ago
+* Status reports take longer than they should
+* Decisions aren’t documented and must be re-explained
+* Context switching destroys memory
+* Performance reviews rely on “remembering everything you did”
+
+**Daily Dev Habit solves this by making logging effortless.**
+
+It prompts you from the terminal and records your work in structured form — to the cloud or locally — so your engineering history is **searchable, exportable, and actually usable**.
+
+---
+
+## ⭐ Key Features
+
+* 🧠 **Structured engineering journal** right in your terminal
+* ☁️ **Cloud sync** (with secure auth token)
+* ✈️ **Offline-first**: falls back to Markdown logs automatically
+* 🏷 **Tagging support** for fast categorization
+* 📝 **Markdown export** for reporting & backups
+* 🔌 **WordPress plugin integration available**
+* 🚀 Minimal setup – works across platforms
+
+---
 
 ## 📦 Installation
-
-Install the tool globally via NPM:
 
 ```bash
 npm install -g @walruswebdev/daily-devhabit-cli
 ```
 
+Verify install:
+
+```bash
+ddh --version
+```
+
+---
+
 ## ⚡ Quick Start
-Register a new account:
+
+Register:
 
 ```bash
 ddh register
 ```
 
-Log in to sync with the cloud:
+Log in:
+
 ```bash
 ddh login
 ```
 
-Create your first log entry:
+Create your first log:
 
 ```bash
 ddh log
 ```
 
-(Or use the alias ddh l for speed)
+Alias for speed:
+
+```bash
+ddh l
+```
+
+---
 
 ## 🛠 Commands
-`ddh log` (alias: `l`)
-The core command. Launches an interactive survey to capture your current work state.
 
-- Scope: API, Database, Refactor, Feature, etc.
+### `ddh log` (alias: `l`)
 
-- Summary: What did you just do?
+Launches an interactive survey to capture your current work snapshot:
 
-- Key Decisions: Did you choose a specific library or pattern? Why?
+* **Scope** – API, DB, Feature, Refactor, etc.
+* **Summary** – What did you do?
+* **Key Decisions** – what you chose & why
+* **Friction** – blockers / pain points
+* **Tags** – comma-separated keywords
 
-- Friction: What slowed you down?
+---
 
-- Tags: Comma-separated tags for categorization.
+### `ddh export`
+
+> New in **v1.1.0**
+
+Exports your entire engineering history as Markdown.
+
+* Fetches your logs from the cloud
+* Generates a timestamped file like:
+
+```
+ddh_export_2025-12-26_20-45.md
+```
+
+* Great for:
+
+  * weekly reports
+  * retrospectives
+  * performance reviews
+  * backups
+
+---
 
 ### `ddh token`
-Displays your current Cloud API Token.
 
-- Use Case: Copy this token to connect your Daily Dev Habit WordPress Plugin to your cloud account.
+Displays your current **Cloud API token**.
+
+Used to connect integrations such as the WordPress plugin.
+
+---
 
 ### `ddh login`
-Authenticates your session and saves your credentials locally to `~/.config/daily-devhabit-cli-nodejs/`.
+
+Authenticates and stores your credentials securely on your machine.
+
+---
 
 ### `ddh register`
-Creates a new user account on the Daily Dev Habit platform.
 
-## 🔌 WordPress Integration
-This CLI works hand-in-hand with the Daily Dev Habit WordPress Plugin.
+Creates a new Daily Dev Habit cloud account.
 
-1. Run `ddh token` in your terminal.
+---
 
-2. Copy the output string.
+## 🔌 WordPress Integration (Optional)
 
-3. Paste it into your WordPress Admin > Daily Dev Habit > Settings.
+The CLI integrates with the [Daily Dev Habit WordPress Plugin](https://dailydevhabit.com/download/).
 
-4. Result: Your WordPress site will now pull in your engineering metrics and logs automatically.
+1. Run:
 
-## 🛡️ Offline Support
-Bad internet? No problem. If the CLI cannot connect to the server (or if you are not logged in), it automatically falls back to Local Mode.
+```bash
+ddh token
+```
 
-- Logs are saved to a file named OFFLINE_LOGS.md in your current working directory.
+2. Copy your API token
+3. Paste it inside:
 
-- Markdown formatted for easy reading.
+> WordPress Admin → Daily Dev Habit → Settings
+
+Your WordPress site can now send engineering metrics from an Admin Dashboard form. 
+This is helpful for less technical users and/or capturing different aspects of the project development.
+
+---
+
+## 🛡 Offline Support
+
+No internet? No problem.
+
+* CLI detects connectivity loss automatically
+* Switches to **Local Mode**
+* Writes entries to:
+
+```
+OFFLINE_LOGS.md
+```
+
+* Stored in the **current working directory**
+* Uses clean Markdown formatting
+
+
+---
+
+## 🏗 Tech Stack (for contributors and curious devs)
+
+* **Commander** – command routing & argument parsing
+* **Inquirer** – interactive CLI questions
+* **Axios** – HTTP networking to backend API
+* **Conf** – secure local token storage
+* **Path** – cross-platform path reliability
+* **fs** – file system writing for offline/export support
+
+---
+
+## 🎯 Who this tool is great for
+
+* solo developers and indie hackers
+* engineers who context-switch frequently
+* freelancers writing client status reports
+* teams wanting light-weight telemetry
+* devs building a **“brag document”**
+* people who hate filling out retro forms Friday afternoon
+
+---
+
+## 🧭 Roadmap
+
+Planned features:
+
+* 🔍 search logs from the CLI
+* 📊 metrics dashboards
+* 🤝 team workspaces
+* 🧩 plugin integration ecosystem
+* ⏱ daily reminder option
+
+Contributions & ideas welcome!
+
+---
+
+## 🤝 Contributing
+
+Pull requests are very welcome — especially since this is an early project.
+
+Good first contributions:
+
+* docs improvements
+* CLI UX polish
+* validation of prompts
+* bug reports
+* ideas & feature proposals
+
+---
 
 ## 📝 License
+
 ISC © Lauren Bridges
