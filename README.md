@@ -102,7 +102,7 @@ Launches an interactive survey to capture your current work snapshot:
 
 ### `ddh export`
 
-> New in **v1.1.0**
+> New in **v1.1.1**
 
 Exports your entire engineering history as Markdown.
 
