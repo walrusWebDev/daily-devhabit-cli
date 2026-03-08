@@ -70,19 +70,27 @@ program
   .alias('l')
   .description('Create a new engineering log entry')
   .action(async () => {
-    
     const token = config.get('auth.token') as string || process.env.DEV_CLI_TOKEN;
-    
+    const lastProject = config.get('lastProject') || ''; // Memory feature
+
     if (!token) {
       console.log('❌ You are not logged in. Please run: ddh login');
     }
 
     const answers = await inquirer.prompt([
         {
+          type: 'input',
+          name: 'project',
+          message: 'Project Name:',
+          default: lastProject, // Saves you typing if working on the same project
+          validate: (input) => input ? true : 'Project name is required for analysis.'
+        },
+        {
           type: 'list',
           name: 'scope',
           message: 'What is the scope of this work?',
-          choices: ['api', 'cli', 'database', 'docker', 'auth', 'refactor', 'docs', 'feature']
+          // Expanded list to reduce "choice compromise"
+          choices: ['prototype', 'boilerplate', 'feature', 'refactor', 'integration', 'database', 'docker', 'environment', 'auth', 'ui/ux', 'docs']
         },
         {
           type: 'input',
@@ -113,6 +121,9 @@ program
         }
       ]);
 
+      // Save project for next time to reduce friction
+      config.set('lastProject', answers.project);
+
       const payload = {
         ...answers,
         tags: answers.tags ? answers.tags.split(',').map((t: string) => t.trim()) : [],
@@ -128,6 +139,14 @@ program
 
       console.log(`\n✅ Log Saved! (ID: ${response.data.id})`);
       console.log(`   Stored in: Cloud Database`);
+
+      // 🚀 NEW: Trigger Local Webhook for Instant Notion Sync
+      try {
+        await axios.post('http://localhost:3333/webhook/sync', {}, { timeout: 2000 });
+        console.log('✨ Notion tables synced via local bridge.');
+      } catch (e) {
+        // Quietly fail if bridge isn't running
+      }
 
     } catch (error: any) {
       // OFFLINE FALLBACK
