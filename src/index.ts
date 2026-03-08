@@ -145,7 +145,7 @@ program
       if (syncUrl && typeof syncUrl === 'string') {
         try {
           // Adding {} as the second argument (the body) and the URL as the first
-          await axios.post(syncUrl, {}, { timeout: 3000 });
+          await axios.post('https://ddh-notion-bridge-production.up.railway.app/webhook/sync', {}, { timeout: 3000 });
           console.log('✨ Notion tables synced via bridge.');
         } catch (e) {
           // Quietly fail

@@ -7,7 +7,8 @@
     "ddh": "bin/ddh.js"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "release": "npm version patch && npm publish --access public"
   },
   "files": [
     "dist",
