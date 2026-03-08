@@ -65,7 +65,7 @@ program
     .alias('l')
     .description('Create a new engineering log entry')
     .action(async () => {
-    const token = config.get('auth.token') || process.env.DEV_CLI_TOKEN;
+    const token = config.get('auth.token')?.trim();
     const lastProject = config.get('lastProject') || ''; // Memory feature
     if (!token) {
         console.log('❌ You are not logged in. Please run: ddh login');
@@ -128,13 +128,16 @@ program
         });
         console.log(`\n✅ Log Saved! (ID: ${response.data.id})`);
         console.log(`   Stored in: Cloud Database`);
-        // 🚀 NEW: Trigger Local Webhook for Instant Notion Sync
-        try {
-            await axios_1.default.post('http://localhost:3333/webhook/sync', {}, { timeout: 2000 });
-            console.log('✨ Notion tables synced via local bridge.');
-        }
-        catch (e) {
-            // Quietly fail if bridge isn't running
+        const syncUrl = config.get('sync.url') || process.env.DDH_SYNC_URL;
+        if (syncUrl && typeof syncUrl === 'string') {
+            try {
+                // Adding {} as the second argument (the body) and the URL as the first
+                await axios_1.default.post('https://ddh-notion-bridge-production.up.railway.app/webhook/sync', {}, { timeout: 3000 });
+                console.log('✨ Notion tables synced via bridge.');
+            }
+            catch (e) {
+                // Quietly fail
+            }
         }
     }
     catch (error) {
@@ -191,7 +194,7 @@ program
     .description('Download all cloud logs to a timestamped Markdown file')
     .action(async () => {
     // 1. Get Token
-    const token = config.get('auth.token') || process.env.DEV_CLI_TOKEN;
+    const token = config.get('auth.token')?.trim();
     if (!token) {
         console.error('❌ Authentication required. Please run "ddh login" first.');
         return;

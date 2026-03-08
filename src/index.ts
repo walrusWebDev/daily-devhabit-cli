@@ -70,7 +70,7 @@ program
   .alias('l')
   .description('Create a new engineering log entry')
   .action(async () => {
-    const token = config.get('auth.token') as string || process.env.DEV_CLI_TOKEN;
+    const token = (config.get('auth.token') as string | undefined)?.trim();
     const lastProject = config.get('lastProject') || ''; // Memory feature
 
     if (!token) {
@@ -207,7 +207,7 @@ program
   .description('Download all cloud logs to a timestamped Markdown file')
   .action(async () => {
     // 1. Get Token
-    const token = config.get('auth.token') as string || process.env.DEV_CLI_TOKEN;
+    const token = (config.get('auth.token') as string | undefined)?.trim();
 
     if (!token) {
         console.error('❌ Authentication required. Please run "ddh login" first.');
