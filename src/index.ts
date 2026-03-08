@@ -140,18 +140,6 @@ program
       console.log(`\n✅ Log Saved! (ID: ${response.data.id})`);
       console.log(`   Stored in: Cloud Database`);
 
-      const syncUrl = (config.get('sync.url') as string) || (process.env.DDH_SYNC_URL as string);
-
-      if (syncUrl && typeof syncUrl === 'string') {
-        try {
-          // Adding {} as the second argument (the body) and the URL as the first
-          await axios.post('https://ddh-notion-bridge-production.up.railway.app/webhook/sync', {}, { timeout: 3000 });
-          console.log('✨ Notion tables synced via bridge.');
-        } catch (e) {
-          // Quietly fail
-        }
-      }
-
     } catch (error: any) {
       // OFFLINE FALLBACK
       const isOffline = error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND';
