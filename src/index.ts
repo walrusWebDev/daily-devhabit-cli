@@ -140,12 +140,16 @@ program
       console.log(`\n✅ Log Saved! (ID: ${response.data.id})`);
       console.log(`   Stored in: Cloud Database`);
 
-      // 🚀 NEW: Trigger Local Webhook for Instant Notion Sync
-      try {
-        await axios.post('http://localhost:3333/webhook/sync', {}, { timeout: 2000 });
-        console.log('✨ Notion tables synced via local bridge.');
-      } catch (e) {
-        // Quietly fail if bridge isn't running
+      const syncUrl = (config.get('sync.url') as string) || (process.env.DDH_SYNC_URL as string);
+
+      if (syncUrl && typeof syncUrl === 'string') {
+        try {
+          // Adding {} as the second argument (the body) and the URL as the first
+          await axios.post(syncUrl, {}, { timeout: 3000 });
+          console.log('✨ Notion tables synced via bridge.');
+        } catch (e) {
+          // Quietly fail
+        }
       }
 
     } catch (error: any) {
